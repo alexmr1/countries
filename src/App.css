@@ -1,3 +1,19 @@
 .App {
   text-align: center;
 }
+
+.flagImage {
+  width: 50px;
+  padding: 10px;
+}
+.countriesList {
+  list-style-type: none;
+}
+
+.indvCountry {
+  display: inline-block;
+  justify-content: space-evenly;
+  width: 500px;
+  border: dotted 1px black;
+  margin: 0.5em;
+}
