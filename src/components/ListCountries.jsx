@@ -5,60 +5,35 @@ class ListCountries extends Component {
   state = {
     countries: [],
     isLoading: true,
-    regions: [],
+    regions: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
   };
 
   componentDidMount() {
     this.getListCountries();
   }
 
-  // handleRegion(clickEvent) {
-  //   console.dir(clickEvent);
-  //   // const region = clickEvent.target.dataset.region;
-  //   // return region;
-  // }
+  handleSorting = (clickEvent) => {
+    const region = clickEvent.nativeEvent.target.innerHTML;
+    this.getCountriesByRegion(region);
+  };
 
   render() {
-    const { isLoading, countries } = this.state;
+    const { isLoading, countries, regions } = this.state;
     if (isLoading) return <p>loading ...</p>;
 
     return (
       <div>
-        <button
-          data-region="Africa"
-          className="regionButton"
-          onClick={this.getCountriesByRegion}
-        >
-          Africa
-        </button>
-        <button
-          data-region="Americas"
-          className="regionButton"
-          onClick={this.getCountriesByRegion}
-        >
-          Americas
-        </button>
-        <button
-          data-region="Asia"
-          className="regionButton"
-          onClick={this.getCountriesByRegion}
-        >
-          Asia
-        </button>
-        <button
-          data-region="Europe"
-          className="regionButton"
-          onClick={this.getCountriesByRegion}
-        >
-          Europe
-        </button>
-        <button
-          data-region="Oceania"
-          className="regionButton"
-          onClick={this.getCountriesByRegion}
-        >
-          Oceania
-        </button>
+        {regions.map((region) => {
+          return (
+            <button
+              className="regionButton"
+              onClick={this.handleSorting}
+              key={region}
+            >
+              {region}
+            </button>
+          );
+        })}
         <ul className="countriesList">
           {countries.map((country) => {
             return (
@@ -84,17 +59,9 @@ class ListCountries extends Component {
     });
   }
 
-  getCountriesByRegion(clickEvent) {
-    const regionClicked = clickEvent.target.dataset.region;
-    console.log(regionClicked);
-    fetchCountries().then((data) => {
-      const filteredCountries = data.filter(({ region }) => {
-        return region === regionClicked;
-      });
-
-      return Promise.all(filteredCountries).then((countries) =>
-        this.setState({ countries: countries, isLoading: false })
-      );
+  getCountriesByRegion(region) {
+    fetchCountries(region).then((data) => {
+      this.setState({ countries: data, isLoading: false });
     });
   }
 }
