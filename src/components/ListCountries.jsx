@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import fetchCountries from "../api";
+import CountryCard from "./CountryCard";
+import MapCard from "./MapCard";
 
 class ListCountries extends Component {
   state = {
     countries: [],
     isLoading: true,
     regions: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
+    currentLatLng: [],
   };
 
   componentDidMount() {
@@ -17,8 +20,13 @@ class ListCountries extends Component {
     this.getCountriesByRegion(region);
   };
 
+  handleCardClick = ({ latlng }) => {
+    // console.log("clicked");
+    this.setState({ currentLatLng: latlng });
+  };
+
   render() {
-    const { isLoading, countries, regions } = this.state;
+    const { isLoading, countries, regions, currentLatLng } = this.state;
     if (isLoading) return <p>loading ...</p>;
 
     return (
@@ -34,21 +42,13 @@ class ListCountries extends Component {
             </button>
           );
         })}
-        <ul className="countriesList">
-          {countries.map((country) => {
-            return (
-              <li key={country.alpha3Code} className="indvCountry">
-                <img
-                  className="flagImage"
-                  src={country.flag}
-                  alt={`${country.name} flag`}
-                />{" "}
-                <p> Name: {country.name} </p>
-                <p> Capital: {country.capital} </p>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="mapCountry">
+          <MapCard currentLatLng={currentLatLng} />
+        </div>
+        <CountryCard
+          countries={countries}
+          handleCardClick={this.handleCardClick}
+        />
       </div>
     );
   }

@@ -9,7 +9,6 @@ function App() {
         <h1>Countries Stats</h1>
       </header>
       <main>
-        <p>Chart</p>
         <ListCountries />
       </main>
     </div>
