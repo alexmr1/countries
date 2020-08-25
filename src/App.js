@@ -8,9 +8,8 @@ function App() {
       <header>
         <h1>Countries Stats</h1>
       </header>
-      <main>
-        <ListCountries />
-      </main>
+
+      <ListCountries />
     </div>
   );
 }

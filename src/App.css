@@ -1,5 +1,36 @@
-.App {
+header {
   text-align: center;
+  grid-area: head;
+}
+
+.filter {
+  grid-area: filter;
+  text-align: center;
+}
+
+.mapContainer {
+  grid-area: map;
+}
+
+ul {
+  list-style-type: none;
+  grid-area: list;
+  text-align: center;
+}
+button {
+  margin: 10px;
+}
+.App {
+  display: grid;
+  grid-template-rows: 100px 100px auto auto;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template:
+    "head head head head head"
+    "filter filter filter filter filter"
+    ". . map . ."
+    ". . list . .";
+  align-content: space-between;
+  justify-content: center;
 }
 
 .flagImage {
@@ -7,23 +38,12 @@
   padding: 10px;
   cursor: pointer;
 }
-.countriesList {
-  list-style-type: none;
-}
 
 .indvCountry {
-  display: inline-block;
-  justify-content: space-evenly;
+  /* display: inline-block; */
+  /* justify-content: space-evenly; */
+  text-align: center;
   width: 500px;
   border: dotted 1px black;
   margin: 0.5em;
-}
-
-.regionButton {
-  margin: 10px;
-}
-
-.mapCountry {
-  width: 50px;
-  height: 80px;
 }

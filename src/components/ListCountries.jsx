@@ -23,6 +23,7 @@ class ListCountries extends Component {
   handleCardClick = ({ latlng }) => {
     // console.log("clicked");
     this.setState({ currentLatLng: latlng });
+    window.scrollTo(0, 0);
   };
 
   render() {
@@ -30,26 +31,26 @@ class ListCountries extends Component {
     if (isLoading) return <p>loading ...</p>;
 
     return (
-      <div>
-        {regions.map((region) => {
-          return (
-            <button
-              className="regionButton"
-              onClick={this.handleSorting}
-              key={region}
-            >
-              {region}
-            </button>
-          );
-        })}
-        <div className="mapCountry">
+      // <main>
+      <React.Fragment>
+        <section className="filter">
+          {regions.map((region) => {
+            return (
+              <button onClick={this.handleSorting} key={region}>
+                {region}
+              </button>
+            );
+          })}
+        </section>
+        <section className="mapContainer">
           <MapCard currentLatLng={currentLatLng} />
-        </div>
+        </section>
         <CountryCard
           countries={countries}
           handleCardClick={this.handleCardClick}
         />
-      </div>
+      </React.Fragment>
+      // </main>
     );
   }
 
