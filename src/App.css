@@ -10,6 +10,8 @@ header {
 
 .mapContainer {
   grid-area: map;
+  display: flex;
+  justify-content: center;
 }
 
 ul {
@@ -23,13 +25,13 @@ button {
 .App {
   display: grid;
   grid-template-rows: 100px 100px auto auto;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: 100px 500px 100px;
   grid-template:
     "head head head head head"
     "filter filter filter filter filter"
-    ". . map . ."
-    ". . list . .";
-  align-content: space-between;
+    ". . map . . "
+    ". . list . . ";
+  align-content: space-around;
   justify-content: center;
 }
 
@@ -40,7 +42,7 @@ button {
 }
 
 .indvCountry {
-  /* display: inline-block; */
+  display: inline-block;
   /* justify-content: space-evenly; */
   text-align: center;
   width: 500px;
